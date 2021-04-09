@@ -1,7 +1,7 @@
 # Code by Simon Monk https://github.com/simonmonk/
 
 from . import MFRC522
-import RPi.GPIO as GPIO
+import OPi.GPIO as GPIO # Original: import RPi.GPIO as GPIO
   
 class SimpleMFRC522:
 
@@ -50,7 +50,7 @@ class SimpleMFRC522:
         for block_num in self.BLOCK_ADDRS:
             block = self.READER.MFRC522_Read(block_num) 
             if block:
-            		data += block
+                data += block
         if data:
              text_read = ''.join(chr(i) for i in data)
     self.READER.MFRC522_StopCrypto1()
@@ -85,6 +85,6 @@ class SimpleMFRC522:
       
   def uid_to_num(self, uid):
       n = 0
-      for i in range(0, 5):
+      for i in range(3, -1, -1):
           n = n * 256 + uid[i]
       return n
